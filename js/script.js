@@ -16,9 +16,10 @@ const placeholder = function (word) {
     for(const letter of word) {
         console.log(letter);
             placeholderLetters.push("●")
+
+progress.innerText = placeholderLetters.join("");
 }
 
-progress.innerText = placeholderLetters.join(""); 
 };
 
 placeholder(word);
@@ -32,7 +33,9 @@ button.addEventListener("click", function (e) {
     if(singleLetterGuess) {
         makeGuess(guess);
     }
-    textInput.value = "";
+
+textInput.value = "";
+
 });
 
 //Accept & Validate Player Guesses
