@@ -1,12 +1,13 @@
-const guessedLetters = document.querySelector(".guessed-letters");
+const guessedLettersElement = document.querySelector(".guessed-letters");
 const button = document.querySelector(".guess");
 const textInput = document.querySelector(".letter");
 const progress = document.querySelector(".word-in-progress");
 const remaining = document.querySelector(".remaining");
-const span = document.querySelector("span");
+const span = document.querySelector("remaining span");
 const message = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again")
 const word = "magnolia";
+const guessedLetters = [];
 
 
 //Adding placeholders
@@ -17,16 +18,17 @@ const placeholder = function (word) {
             placeholderLetters.push("●")
 }
 
-progress.innerText = placeholderLetters.join("");
+progress.innerText = placeholderLetters.join(""); 
 };
 
 placeholder(word);
 
+//Button Element
 button.addEventListener("click", function (e) {
     e.preventDeafult();
     message.innerText = ""; // Empty message
     const guess = textInput.value;
-    const singleLetterGuess = textInput(guess);
+    const singleLetterGuess = playerInput(guess);
     if(singleLetterGuess) {
         makeGuess(guess);
     }
@@ -40,13 +42,14 @@ let playerInput = function (input) {
         message.innerText = "Please enter a letter.";
       } else if (input.length > 1) { // Check if more than one letter is typed.
         message.innerText = "Please enter a single letter.";
-      } else if (!input.match(acceptedLetter)) {
+      } else if (!input.match(acceptedLetter)) {//check for matched letter.
         message.innerText = "Please enter a letter from A to Z.";
       } else {
         return input;
       }
     };
 
+//Capture Input
 const makeGuess = function(guess) {
     guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
