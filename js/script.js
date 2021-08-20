@@ -1,7 +1,7 @@
 const guessedLettersElement = document.querySelector(".guessed-letters");
-const button = document.querySelector(".guess");
+const guessButton = document.querySelector(".guess");
 const textInput = document.querySelector(".letter");
-const progress = document.querySelector(".word-in-progress");
+const wordInProgress = document.querySelector(".word-in-progress");
 const remaining = document.querySelector(".remaining");
 const span = document.querySelector("remaining span");
 const message = document.querySelector(".message");
@@ -17,14 +17,14 @@ const placeholder = function (word) {
         console.log(letter);
             placeholderLetters.push("●");
 
-progress.innerText = placeholderLetters.join("");
+wordInProgress.innerText = placeholderLetters.join("");
 }
 };
 
 placeholder(word);
 
-//Button Element
-button.addEventListener("click", function (e) {
+//Guess Button Element
+guessButton.addEventListener("click", function (e) {
     e.preventDeafult();
     message.innerText = ""; // Empty message
     const guess = textInput.value;
@@ -87,6 +87,8 @@ const updateWordInProgress = function (guessedLetters) {
       }
     }
 };
+
+//console.log(showWord);
 
 //Function to see if the player won
 wordInProgress.innerText = showWord.join("");
