@@ -5,7 +5,7 @@ const progress = document.querySelector(".word-in-progress");
 const remaining = document.querySelector(".remaining");
 const span = document.querySelector("remaining span");
 const message = document.querySelector(".message");
-const playAgain = document.querySelector(".play-again")
+const playAgain = document.querySelector(".play-again");
 const word = "magnolia";
 const guessedLetters = [];
 
@@ -15,7 +15,7 @@ const placeholder = function (word) {
     const placeholderLetters = [];
     for(const letter of word) {
         console.log(letter);
-            placeholderLetters.push("●")
+            placeholderLetters.push("●");
 
 progress.innerText = placeholderLetters.join("");
 }
@@ -34,7 +34,7 @@ button.addEventListener("click", function (e) {
         makeGuess(guess);
     }
 
-textInput.value = "";
+    textInput.value = "";
 
 });
 
@@ -50,7 +50,7 @@ let playerInput = function (input) {
       } else {
         return input;
       }
-    };
+};
 
 //Capture Input
 const makeGuess = function(guess) {
@@ -60,5 +60,35 @@ const makeGuess = function(guess) {
     } else {
       guessedLetters.push(guess);
       console.log(guessedLetters);
+      showGuessedLetters();
+      updateWordInProgress(guessedLetters);
+    }
+};
+
+//Show guessed letters
+const showGuessedLetters = function() {
+  guessedLettersElement.innerHTML = "";
+    for (const letter of guessedLetters) {
+    const li = document.createElement("li");
+    li.innerText = letter;
+    guessedLettersElement.append(li);
+  }
+};
+
+//Update the word in progress to replace circle symbols
+const updateWordInProgress = function (guessedLetters) {
+  const wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split("");
+  const showWord = [];
+    for (const letter of wordArray) {
+      if (guessedLetters.includes(letter)) {
+        showWord.push(letter.toUpperCase());
+      } else {
+        showWord.push("●");
+      }
     }
   };
+
+  
+
+//Function to see if the player won
