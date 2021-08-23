@@ -14,18 +14,18 @@ const guessedLetters = [];
 const placeholder = function (word) {
     const placeholderLetters = [];
     for(const letter of word) {
-        console.log(letter);
-            placeholderLetters.push("●");
+      console.log(letter);
+      placeholderLetters.push("●");
 
-wordInProgress.innerText = placeholderLetters.join("");
-}
+      wordInProgress.innerText = placeholderLetters.join("");
+    }
 };
 
 placeholder(word);
 
 //Guess Button Element
 guessButton.addEventListener("click", function (e) {
-    e.preventDeafult();
+    e.preventDefault();
     message.innerText = ""; // Empty message
     const guess = textInput.value;
     const singleLetterGuess = playerInput(guess);
@@ -86,13 +86,15 @@ const updateWordInProgress = function (guessedLetters) {
         showWord.push("●");
       }
     }
+
+    wordInProgress.innerText = showWord.join("");
+    checkPlayerWin();
 };
 
 //console.log(showWord);
 
 //Function to see if the player won
-wordInProgress.innerText = showWord.join("");
-checkPlayerWin();
+
 
 const checkPlayerWin = function () {
   if (word.toUpperCase() === wordInProgress.innerText) {
