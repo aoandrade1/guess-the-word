@@ -6,15 +6,16 @@ const remaining = document.querySelector(".remaining");
 const remainingGuessSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
+let form = document.querySelector(".form-element");
 let word = "magnolia";
-const guessedLetters = [];
+let guessedLetters = [];
 let remainingGuesses = 8;
 
 
 
 //Add Async Function
 const getWord = async function () {
-  const response = await fetch("words.txt");
+  const response = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
   const words = await response.text();
   const wordArray = words.split("\n");
   const randomIndex = Math.floor(Math.random() * wordArray.length);
@@ -121,6 +122,7 @@ const updateGuessesRemaining = function (guess) {
 
     if (remainingGuesses === 0) {
       message.innerHTML = `GAME OVER. The word was <span class="highlight">${word}</span>`;
+      startOver();
     } else if (remainingGuesses === 1) {
     remainingGuessSpan.innerText = `${remainingGuesses} guess`;
     } else {
@@ -133,9 +135,36 @@ const checkPlayerWin = function () {
   if (word.toUpperCase() === wordInProgress.innerText) {
     message.classList.add("win");
     message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
-    }
-  };
+    //Add Confeti Animation
+    //startConfetti();
+    startOver();
+  }
+};
 
-const startOver = function() {
-  
-}  
+//Reset Game
+const startOver = function () {
+  guessButton.classList.add("hide");
+  remaining.classList.add("hide");
+  guessedLettersElement.classList.add("hide");
+  playAgain.classList.remove("hide");
+};
+
+playAgain.addEventListener("click", function () {
+
+  message.classList.remove("win");
+  guessedLetters = [];
+  remainingGuesses = 8;
+  remainingGuessSpan.innerText = `${remainingGuesses} guesses`;
+  guessedLettersElement.innerHTML = "";
+  message.innerText = "";
+  //stopConfetti();
+
+  // Grab a new word
+  getWord();
+
+  // show reset elements
+  guessButton.classList.remove("hide");
+  playAgain.classList.add("hide");
+  remaining.classList.remove("hide");
+  guessedLettersElement.classList.remove("hide");
+});
