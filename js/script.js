@@ -21,7 +21,7 @@ const getWord = async function () {
   word = wordArray[randomIndex].trim();
   placeholder(word);
 };
-
+ 
 // Call function/Test game
 getWord();
 
@@ -135,3 +135,7 @@ const checkPlayerWin = function () {
     message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
     }
   };
+
+const startOver = function() {
+  
+}  
